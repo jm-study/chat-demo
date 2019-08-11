@@ -9,9 +9,13 @@
     <script src="/app.js"></script>
 </head>
 <body>
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
-    enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
+<noscript>
+    <h2 style="color: #ff0000">
+        Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+        enabled. Please enable
+        Javascript and reload this page!
+    </h2>
+</noscript>
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
@@ -30,7 +34,13 @@
                     <label for="name">What is your name?</label>
                     <input type="text" id="name" class="form-control" placeholder="Your name here...">
                 </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
+                <button id="login" class="btn btn-default" type="submit">Login</button>
+
+                <div class="form-group">
+                    <label for="message">Input Message</label>
+                    <input type="text" id="chatMessage" class="form-control" placeholder="message...">
+                </div>
+                <button id="chatSend" class="btn btn-default" type="submit">Chat Send</button>
             </form>
         </div>
     </div>
@@ -39,10 +49,10 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>Message</th>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+                <tbody id="messages">
                 </tbody>
             </table>
         </div>

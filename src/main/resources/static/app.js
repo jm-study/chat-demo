@@ -9,7 +9,7 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#messages").html("");
 }
 
 function connect() {
@@ -18,8 +18,13 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
+
+//        console.log('Connected: ' + $("#name").val());
         stompClient.subscribe('/topic/greetings', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
+        });
+        stompClient.subscribe('/topic/chat', function (chat) {
+            showChat(JSON.parse(chat.body));
         });
     });
 }
@@ -32,12 +37,21 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
+function sendGreeting() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+function showGreeting(greetingMessage) {
+    console.log("showGreeting");
+     $("#messages").append("<tr><td>" + greetingMessage + "</td></tr>");
+}
+
+function sendChat() {
+    stompClient.send("/app/chat", {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
+}
+
+function showChat(chat){
+    $("#messages").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
 }
 
 $(function () {
@@ -46,5 +60,8 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+
+    $( "#login" ).click(function() { sendGreeting(); });
+
+    $( "#chatSend" ).click(function() { sendChat(); });
 });
