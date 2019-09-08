@@ -21,5 +21,8 @@ dependencies {
 	compile("org.webjars:bootstrap:3.3.7")
 	compile("org.webjars.bower:jquery:3.4.1+")
 
+	compileOnly 'org.projectlombok:lombok:1.18.8'
+	annotationProcessor 'org.projectlombok:lombok:1.18.8'
+	
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 }

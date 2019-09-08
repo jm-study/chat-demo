@@ -1,4 +1,4 @@
-package study.chat.chatDemo.hello;
+package study.chat.chatDemo.hello.model;
 
 public class Chat {
     private String name;
