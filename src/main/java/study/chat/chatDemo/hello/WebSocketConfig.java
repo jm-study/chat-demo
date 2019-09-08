@@ -1,4 +1,4 @@
-package hello;
+package study.chat.chatDemo.hello;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

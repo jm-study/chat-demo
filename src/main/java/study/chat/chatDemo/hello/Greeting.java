@@ -1,4 +1,4 @@
-package hello;
+package study.chat.chatDemo.hello;
 
 public class Greeting {
     private String content;

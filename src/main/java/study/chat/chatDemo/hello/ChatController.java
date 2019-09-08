@@ -1,4 +1,4 @@
-package hello;
+package study.chat.chatDemo.hello;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -9,11 +9,11 @@ import org.springframework.web.util.HtmlUtils;
 public class ChatController {
 
 
-    @MessageMapping("/hello")
+    @MessageMapping("/study/chat/chatDemo/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        return new Greeting(HtmlUtils.htmlEscape(message.getName()) + "´ÔÀÌ ·Î±×ÀÎÇÏ¼Ì½À´Ï´Ù.");
+        return new Greeting(HtmlUtils.htmlEscape(message.getName()) + "ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï¼Ì½ï¿½ï¿½Ï´ï¿½.");
     }
 
     @MessageMapping("/chat")
