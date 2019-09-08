@@ -5,7 +5,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
-import study.chat.chatDemo.hello.model.Greeting;
+import study.chat.chatDemo.hello.model.Contents;
 import study.chat.chatDemo.hello.model.HelloMessage;
 import study.chat.chatDemo.hello.model.Chat;
 import study.chat.chatDemo.hello.service.ContentsSevice;
@@ -18,9 +18,9 @@ public class ChatController {
 
     @MessageMapping("/study/chat/chatDemo/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
+    public Contents greeting(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        return new Greeting(HtmlUtils.htmlEscape(message.getName()) + "���� �α����ϼ̽��ϴ�.");
+        return new Contents(HtmlUtils.htmlEscape(message.getName()) + "���� �α����ϼ̽��ϴ�.");
     }
 
     @MessageMapping("/chat")
@@ -32,7 +32,7 @@ public class ChatController {
 
     @MessageMapping("/macro")
     @SendTo("/topic/greetings")
-    public Greeting macroGreeting() {
+    public Contents macroGreeting() {
         return contentsSevice.showMacroFromApiServer();
     }
 
