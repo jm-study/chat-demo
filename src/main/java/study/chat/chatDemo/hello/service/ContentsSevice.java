@@ -13,7 +13,7 @@ import java.util.Map;
 public class ContentsSevice {
 
     public Contents showMacroFromApiServer() {
-        String apiServerUrl = "127.0.0.1:9080/macro";
+        String apiServerUrl = "http://127.0.0.1:9080/macro";
 
         Map<String, Object> result =CallApiCommon.callApi(apiServerUrl, null);
 

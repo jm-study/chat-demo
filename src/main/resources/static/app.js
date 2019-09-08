@@ -55,7 +55,7 @@ function showChat(chat){
 }
 
 function callMacroApi() {
-    stompClient.seal("/app/macro");
+    stompClient.send("/app/macro");
 }
 
 $(function () {
