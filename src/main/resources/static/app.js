@@ -54,6 +54,10 @@ function showChat(chat){
     $("#messages").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
 }
 
+function callMacroApi() {
+    stompClient.seal("/app/macro");
+}
+
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
@@ -64,4 +68,6 @@ $(function () {
     $( "#login" ).click(function() { sendGreeting(); });
 
     $( "#chatSend" ).click(function() { sendChat(); });
+
+    $( "#callMacro" ).click(function () { callMacroApi(); });
 });
