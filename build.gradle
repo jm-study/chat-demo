@@ -25,4 +25,17 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.8'
 	
 	testCompile("org.springframework.boot:spring-boot-starter-test")
+
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
+
+
+	testCompile("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		exclude group: 'junit', module: 'junit'
+	}
+	
+}
+
+task wholeTest(type: Test, group: 'verification') {
+	useJUnit { }
 }
