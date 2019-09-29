@@ -19,7 +19,7 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
 
-//        console.log('Connected: ' + $("#name").val());
+//        console.log('Connected: ' + $("#id").val());
         stompClient.subscribe('/topic/greetings', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
@@ -38,7 +38,11 @@ function disconnect() {
 }
 
 function sendGreeting() {
-    stompClient.send("/app/study.chat.chatDemo.hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/study.chat.chatDemo.hello", {}, JSON.stringify({'id': $("#id").val()}));
+}
+
+function callLoginApi() {
+     stompClient.send("/app/login", {}, $("#id").val());
 }
 
 function showGreeting(greetingMessage) {
@@ -47,15 +51,15 @@ function showGreeting(greetingMessage) {
 }
 
 function sendChat() {
-    stompClient.send("/app/chat", {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
+    stompClient.send("/app/chat", {}, JSON.stringify({'id': $("#id").val(), 'message': $("#chatMessage").val()}));
 }
 
 function showChat(chat){
-    $("#messages").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
+    $("#messages").append("<tr><td>" + chat.nicName + " : " + chat.message + "</td></tr>");
 }
 
 function callMacroApi() {
-    stompClient.send("/app/macro");
+    stompClient.send("/app/macro", {}, $("#id").val());
 }
 
 $(function () {
@@ -65,7 +69,7 @@ $(function () {
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
 
-    $( "#login" ).click(function() { sendGreeting(); });
+    $( "#login" ).click(function() { callLoginApi(); });
 
     $( "#chatSend" ).click(function() { sendChat(); });
 

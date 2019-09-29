@@ -39,6 +39,21 @@ public class CallApiCommon {
 
     }
 
+    public static Map<String ,Object> callGetApi(String url, Map<String, Object> messageBody) {
+        if(url == null) {
+            throw new HttpException("url is null");
+        }
+
+        try {
+            URL callbackUrl = new URL(url);
+
+            return callHttpsApi(callbackUrl, RequestMethod.GET, getJsonBody(messageBody));
+        } catch (Exception e) {
+            throw new HttpException(e);
+        }
+
+    }
+
 
     public static String getJsonBody(Map<String, Object> messageBody) {
         String jsonBody;
