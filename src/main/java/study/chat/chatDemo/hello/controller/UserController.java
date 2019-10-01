@@ -15,15 +15,15 @@ public class UserController {
 
     @MessageMapping("/login")
     @SendTo("/topic/login")
-    public boolean login(String userId){
+    public User login(String userId){
         User user = userService.showUserInfoFromApiServer(userId);
 
         if (null == user){
-            System.out.println("1");
-            return false;
+            System.out.println(user);
+            return null;
         } else {
-            System.out.println("2");
-            return true;
+            System.out.println(user);
+            return user;
         }
     }
 }

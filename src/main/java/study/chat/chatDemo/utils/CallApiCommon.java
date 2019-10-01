@@ -104,6 +104,10 @@ public class CallApiCommon {
 
         try {
             String jsonString = callConnectedHttpsApi(hcon, requestMethod, jsonBody);
+
+            if (jsonString == "") {
+                return null;
+            }
             return jsonStringToMap(jsonString);
 
         } finally {

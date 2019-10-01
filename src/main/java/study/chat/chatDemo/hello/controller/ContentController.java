@@ -17,6 +17,8 @@ public class ContentController {
     @SendTo("/topic/chat")
     public Content chat(Content chat) throws Exception {
         System.out.println("In Controller");
+        System.out.println(chat);
+
         return new Content(chat.getNicName(), chat.getMessage());
     }
 
