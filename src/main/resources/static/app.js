@@ -19,12 +19,19 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
 
-//        console.log('Connected: ' + $("#name").val());
         stompClient.subscribe('/topic/greetings', function (greeting) {
+            console.log('/topic/greetings = '+greeting)
             showGreeting(JSON.parse(greeting.body).content);
         });
+
         stompClient.subscribe('/topic/chat', function (chat) {
+            console.log('/topic/chat = ', chat)
             showChat(JSON.parse(chat.body));
+        });
+
+        stompClient.subscribe('/topic/login', function (user) {
+            console.log('/topic/login = ', user)
+            showNicName(JSON.parse(user.body));
         });
     });
 }
@@ -38,7 +45,13 @@ function disconnect() {
 }
 
 function sendGreeting() {
-    stompClient.send("/app/study.chat.chatDemo.hello", {}, JSON.stringify({'name': $("#name").val()}));
+    console.log("sendGreeting");
+    stompClient.send("/app/study.chat.chatDemo.hello", {}, JSON.stringify({'id': $("#id").val()}));
+}
+
+function callLoginApi() {
+    console.log("callLoginApi");
+    stompClient.send("/app/login", {}, $("#id").val());
 }
 
 function showGreeting(greetingMessage) {
@@ -47,27 +60,32 @@ function showGreeting(greetingMessage) {
 }
 
 function sendChat() {
-    stompClient.send("/app/chat", {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
+    console.log("sendChat");
+    console.log($("#nicName").text());
+    console.log($("#chatMessage").val());
+    stompClient.send("/app/chat", {}, JSON.stringify({'nicName': $("#nicName").text(), 'message': $("#chatMessage").val()}));
 }
 
 function showChat(chat){
-    $("#messages").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
+    $("#messages").append("<tr><td>" + chat.nicName + " : " + chat.message + "</td></tr>");
+}
+
+function showNicName(user){
+    $("#nicName").text(user.nicName);
 }
 
 function callMacroApi() {
-    stompClient.send("/app/macro");
+    stompClient.send("/app/macro", {}, $("#id").val());
 }
 
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
+
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-
-    $( "#login" ).click(function() { sendGreeting(); });
-
+    $( "#login" ).click(function() { callLoginApi(); });
     $( "#chatSend" ).click(function() { sendChat(); });
-
     $( "#callMacro" ).click(function () { callMacroApi(); });
 });

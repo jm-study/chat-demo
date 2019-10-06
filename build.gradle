@@ -13,8 +13,17 @@ repositories {
 	mavenCentral()
 }
 
+bootJar {
+	mainClassName = 'study.chat.chatDemo.ChatDemoApplication'
+}
+
+springBoot {
+    mainClassName = 'study.chat.chatDemo.ChatDemoApplication'
+}
+
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-websocket")
+	compile("org.springframework.boot:spring-boot-devtools")
 	compile("org.webjars:webjars-locator-core")
 	compile("org.webjars:sockjs-client:1.0.2")
 	compile("org.webjars:stomp-websocket:2.3.3")
