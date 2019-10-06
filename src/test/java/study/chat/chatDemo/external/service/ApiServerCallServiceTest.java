@@ -11,11 +11,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import study.chat.chatDemo.external.dto.GetMacroRequest;
 
-import javax.validation.constraints.NotNull;
-
-import static com.sun.tools.doclint.Entity.not;
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static net.bytebuddy.matcher.ElementMatchers.not;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)

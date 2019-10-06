@@ -1,6 +1,5 @@
 package study.chat.chatDemo.hello.service;
 
-import com.oracle.tools.packager.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
